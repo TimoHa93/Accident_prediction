@@ -1,0 +1,2 @@
+model_checkpoint_path: "accidents_grid_best_model"
+all_model_checkpoint_paths: "accidents_grid_best_model"
