@@ -13,7 +13,7 @@ accidents = df_train.drop('Unfallschwere', axis=1)
 accidents_labels = df_train['Unfallschwere'].copy()
 
 #preprocess the training data
-model_sel, X_train, X_test, y_train, y_test = preprocess_data(faxaccidents, faxaccidents_labels)
+model_sel, X_train, X_test, y_train, y_test = preprocess_data(accidents, accidents_labels)
 
 #preprocess the test set
 prediction_data = preprocess_data_to_predict(df_test, model_sel)
@@ -42,3 +42,9 @@ random_search.best_estimator_.save("models/accidents_grid_best_model")
 
 #make predictions
 final_predictions = random_search.best_estimator_.predict(prediction_data)
+
+#add the predictions to the test_data
+df_test['Unfallschwere'] = final_predictions
+df_test = df_test.final_predictions.reset_index()
+
+df_test.to_csv('data/predictions.csv')
