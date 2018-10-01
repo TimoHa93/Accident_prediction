@@ -34,7 +34,7 @@ parameter_distributions = {
 }
 
 #find the best parameters using RandomizedSearchCV
-random_search = RandomizedSearchCV(dnn, parameter_distributions, n_iter=15, scoring='accuracy', verbose=2)
+random_search = RandomizedSearchCV(dnn, parameter_distributions, n_iter=15, scoring='f1_weighted', verbose=2)
 random_search.fit(X_train, y_train)
 
 #save best model
@@ -47,4 +47,4 @@ final_predictions = random_search.best_estimator_.predict(prediction_data)
 df_test['Unfallschwere'] = final_predictions
 df_test = df_test.final_predictions.reset_index()
 
-df_test.to_csv('data/predictions.csv')
+df_test.to_csv('data/predictions.csv', index=False)
